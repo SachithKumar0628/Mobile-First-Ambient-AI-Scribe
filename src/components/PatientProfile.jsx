@@ -15,13 +15,15 @@ const PatientProfile = ({ patient, onBack, onStartConsultation }) => {
       </header>
 
       <div className="profile-header" style={{ display: 'flex', alignItems: 'center', padding: '20px 16px', gap: '16px' }}>
-        <div className="avatar large" style={{ width: '64px', height: '64px', borderRadius: '32px', backgroundColor: 'var(--primary-color)', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '24px', fontWeight: 'bold' }}>{patient?.name?.[0] || 'U'}</div>
+        <div className="avatar large" style={{ width: '64px', height: '64px', borderRadius: '32px', backgroundColor: 'var(--primary-color)', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '24px', fontWeight: 'bold' }}>
+          {patient?.name ? patient.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U'}
+        </div>
         <div className="profile-info">
           <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem' }}>{patient?.name || 'Unknown Patient'}</h3>
-          <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '0.9rem' }}>{patient?.age || 'N/A'} yrs • Blood Group: <span className="highlight-badge" style={{ color: '#e74c3c', fontWeight: 'bold' }}>B+</span></p>
+          <p style={{ margin: '0 0 8px 0', color: '#666', fontSize: '0.9rem' }}>{patient?.age || 'N/A'} yrs • Blood Group: <span className="highlight-badge" style={{ color: '#e74c3c', fontWeight: 'bold' }}>{patient?.bloodGroup || 'B+'}</span></p>
           <div className="allergies" style={{ fontSize: '0.9rem' }}>
             <span className="label" style={{ color: '#666', marginRight: '8px' }}>Allergies:</span> 
-            <span className="allergy-tag" style={{ backgroundColor: '#feece5', color: '#e74c3c', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>Penicillin</span>
+            <span className="allergy-tag" style={{ backgroundColor: '#feece5', color: '#e74c3c', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>{patient?.allergies || 'Penicillin'}</span>
           </div>
         </div>
       </div>
@@ -84,8 +86,16 @@ const PatientProfile = ({ patient, onBack, onStartConsultation }) => {
                 <h4>Current Medications</h4>
               </div>
               <ul className="medication-list" style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ padding: '10px 0', borderBottom: '1px solid #efefef' }}>Atorvastatin 10mg</li>
-                <li style={{ padding: '10px 0' }}>Salbutamol inhaler</li>
+                {patient?.medications && patient.medications.length > 0 ? (
+                  patient.medications.map((med, idx) => (
+                    <li key={idx} style={{ padding: '10px 0', borderBottom: idx < patient.medications.length - 1 ? '1px solid #efefef' : 'none' }}>{med}</li>
+                  ))
+                ) : (
+                  <>
+                    <li style={{ padding: '10px 0', borderBottom: '1px solid #efefef' }}>Atorvastatin 10mg</li>
+                    <li style={{ padding: '10px 0' }}>Salbutamol inhaler</li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
@@ -93,21 +103,19 @@ const PatientProfile = ({ patient, onBack, onStartConsultation }) => {
 
         {activeTab === 'history' && (
           <div className="history-tab" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div className="timeline-card card" style={{ padding: '16px', borderLeft: '4px solid var(--primary-color)' }}>
-              <div className="timeline-date" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '4px' }}>Mar 10, 2025</div>
-              <h4 style={{ margin: '0 0 8px 0' }}>Follow-up: Hypertension</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: 1.4 }}>BP improved. Advised to continue current medication and reduce sodium intake.</p>
-            </div>
-            <div className="timeline-card card" style={{ padding: '16px', borderLeft: '4px solid var(--primary-color)' }}>
-              <div className="timeline-date" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '4px' }}>Feb 05, 2025</div>
-              <h4 style={{ margin: '0 0 8px 0' }}>URI / Cough</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: 1.4 }}>Prescribed short course of antibiotics and cough syrup. Chest sounds clean.</p>
-            </div>
-            <div className="timeline-card card" style={{ padding: '16px', borderLeft: '4px solid var(--primary-color)' }}>
-              <div className="timeline-date" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '4px' }}>Jan 12, 2025</div>
-              <h4 style={{ margin: '0 0 8px 0' }}>Initial Consultation</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: 1.4 }}>Diagnosed with mild hypertension. Started on Atorvastatin. Ordered routine blood work.</p>
-            </div>
+            {patient?.history && patient.history.length > 0 ? (
+              patient.history.map((visit, index) => (
+                <div key={index} className="timeline-card card" style={{ padding: '16px', borderLeft: '4px solid var(--primary-color)' }}>
+                  <div className="timeline-date" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '4px' }}>{visit.date}</div>
+                  <h4 style={{ margin: '0 0 8px 0' }}>{visit.complaint}</h4>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: 1.4 }}>{visit.notes || 'No detailed notes available.'}</p>
+                </div>
+              ))
+            ) : (
+              <div className="timeline-card card" style={{ padding: '16px', borderLeft: '4px solid var(--primary-color)' }}>
+                <p>No history available for this patient.</p>
+              </div>
+            )}
           </div>
         )}
 
