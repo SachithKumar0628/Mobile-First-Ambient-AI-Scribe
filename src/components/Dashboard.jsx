@@ -8,7 +8,7 @@ function Dashboard({ onStartRecording }) {
   return (
     <div className="screen-container animate-fade-in">
       <div className="dashboard-header">
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary-color)', marginBottom: '4px' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0C447C', marginBottom: '4px' }}>
           Good morning, Dr. Priya Nair
         </h2>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -18,36 +18,40 @@ function Dashboard({ onStartRecording }) {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginTop: '16px' }}>
-        <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
+        <div className="card" style={{ borderLeft: '4px solid var(--primary-color)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <TrendingUp size={20} color="var(--primary-color)" />
           </div>
           <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', margin: 0 }}>Today's Consultations</p>
           <p style={{ fontSize: '32px', fontWeight: 700, margin: 0, lineHeight: 1 }}>8</p>
+          <p style={{ fontSize: '10px', color: 'var(--success-color)', margin: 0, fontWeight: 500 }}>↑ 2 from yesterday</p>
         </div>
         
-        <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
+        <div className="card" style={{ borderLeft: '4px solid var(--success-color)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <FileText size={20} color="var(--success-color)" />
           </div>
           <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', margin: 0 }}>Notes Generated</p>
           <p style={{ fontSize: '32px', fontWeight: 700, margin: 0, lineHeight: 1 }}>6</p>
+          <p style={{ fontSize: '10px', color: 'var(--success-color)', margin: 0, fontWeight: 500 }}>↑ 1 from yesterday</p>
         </div>
 
-        <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
+        <div className="card" style={{ borderLeft: '4px solid var(--warning-color)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Clock size={20} color="var(--warning-color)" />
           </div>
           <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', margin: 0 }}>Time Saved Today</p>
           <p style={{ fontSize: '32px', fontWeight: 700, margin: 0, lineHeight: 1 }}>2.4 hrs</p>
+          <p style={{ fontSize: '10px', color: 'var(--success-color)', margin: 0, fontWeight: 500 }}>↑ 0.3 hrs</p>
         </div>
 
-        <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
+        <div className="card" style={{ borderLeft: '4px solid var(--danger-color)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', height: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <AlertCircle size={20} color="var(--danger-color)" />
           </div>
           <p style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', margin: 0 }}>Pending Reviews</p>
           <p style={{ fontSize: '32px', fontWeight: 700, margin: 0, lineHeight: 1 }}>2</p>
+          <p style={{ fontSize: '10px', color: 'var(--success-color)', margin: 0, fontWeight: 500 }}>↓ 1 resolved</p>
         </div>
       </div>
 

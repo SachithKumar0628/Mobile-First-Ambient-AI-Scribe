@@ -22,6 +22,7 @@ function App() {
         <ShieldCheck size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
         Secure · HIPAA compliant · End-to-end encrypted
       </div>
+      <div style={{ height: '1px', backgroundColor: '#e2e8f0', width: '100%' }}></div>
       <header className="app-header">
         <div className="header-left">
           <Activity color="var(--primary-color)" size={24} strokeWidth={2.5} />
