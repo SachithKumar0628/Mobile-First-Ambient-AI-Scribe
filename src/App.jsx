@@ -5,7 +5,7 @@ import PatientList from './components/PatientList';
 import Consultation from './components/Consultation';
 import SoapNoteView from './components/SoapNoteView';
 import PatientProfile from './components/PatientProfile';
-import { Activity, Home, Users, Mic, Clock, Settings, ShieldCheck } from 'lucide-react';
+import { Activity, Home, Users, Mic, Clock, Settings, ShieldCheck, Battery, Wifi } from 'lucide-react';
 
 function App() {
   const [activeScreen, setActiveScreen] = useState('dashboard');
@@ -18,6 +18,13 @@ function App() {
 
   return (
     <>
+      <div className="status-bar">
+        <span>9:41 AM</span>
+        <div className="status-bar-icons">
+          <Wifi size={14} strokeWidth={2.5} />
+          <Battery size={16} fill="currentColor" strokeWidth={1.5} />
+        </div>
+      </div>
       <div className="secure-header">
         <ShieldCheck size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
         Secure · HIPAA compliant · End-to-end encrypted
@@ -68,27 +75,27 @@ function App() {
       )}
 
       <nav className="bottom-bar">
-        <button 
+        <button
           className={`tab-btn ${activeScreen === 'dashboard' ? 'active' : ''}`}
           onClick={() => navigateTo('dashboard')}
         >
-          <Home size={22} />
+          <Home size={22} fill={activeScreen === 'dashboard' ? 'currentColor' : 'none'} />
           <span>Home</span>
         </button>
-        <button 
+        <button
           className={`tab-btn ${activeScreen === 'patientList' ? 'active' : ''}`}
           onClick={() => navigateTo('patientList')}
         >
-          <Users size={22} />
+          <Users size={22} fill={activeScreen === 'patientList' ? 'currentColor' : 'none'} />
           <span>Patients</span>
         </button>
-        <button 
+        <button
           className={`tab-btn ${activeScreen === 'consultation' ? 'active' : ''}`}
           onClick={() => {
             if (selectedPatient) navigateTo('consultation');
           }}
         >
-          <Mic size={22} />
+          <Mic size={22} fill={activeScreen === 'consultation' ? 'currentColor' : 'none'} />
           <span>Record</span>
         </button>
         <button className="tab-btn" style={{ opacity: 0.5 }}>
