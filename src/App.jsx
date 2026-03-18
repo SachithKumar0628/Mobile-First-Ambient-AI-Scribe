@@ -33,10 +33,10 @@ function App() {
       <header className="app-header">
         <div className="header-left">
           <Activity color="var(--primary-color)" size={24} strokeWidth={2.5} />
-          <h1 className="header-title">MedScribe AI</h1>
+          <h1 className="header-title">MedScribe AI Pro</h1>
         </div>
         <div className="header-doctor">
-          Dr. Priya Nair
+          Dr. Smith
         </div>
       </header>
 
