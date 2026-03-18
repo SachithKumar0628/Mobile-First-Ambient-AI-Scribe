@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, CheckCircle, Copy, Download, Languages, Check, AlertTriangle, Calendar, BarChart2, Loader2, Share2, X, Send, Database, UserPlus } from 'lucide-react';
 
 export default function SoapNoteView({ patient, onBack }) {
-  const [showKannada, setShowKannada] = useState(false);
+  const [showHindi, setShowHindi] = useState(false);
   const [showToast, setShowToast] = useState(false);
   
   const [showShareModal, setShowShareModal] = useState(false);
@@ -20,6 +20,13 @@ export default function SoapNoteView({ patient, onBack }) {
     objective: `Vitals:\nBP: ${patient?.vitals?.bp || '138/88'}\nSpO2: ${patient?.vitals?.spo2 || '96'}%\nHR: ${patient?.vitals?.hr || '82'} bpm\nTemp: ${patient?.vitals?.temp || '98.4'} °F\nWeight: ${patient?.vitals?.weight || '74'} kg`,
     assessment: "1. Persistent dry cough with chest tightness and exertional dyspnea, suggestive of reactive airway disease or asthma exacerbation.\n2. History of tobacco use, raising suspicion for early COPD.",
     plan: "- Order chest X-ray and spirometry to evaluate baseline lung function.\n- Start Salbutamol inhaler PRN for symptomatic relief of chest tightness and dyspnea.\n- Discuss smoking cessation strategies at next visit.\n- Follow up in two weeks after imaging and PFT results are available."
+  };
+
+  const hindiData = {
+    subjective: "मरीज 45 वर्षीय पुरुष है, जिसे 3 सप्ताह से सूखी खांसी है, जो रात में बढ़ जाती है, और सीने में जकड़न है। बुखार से इनकार किया है लेकिन थोड़ा काम करने पर सांस फूलने की शिकायत की है। पूर्व धूम्रपान करने वाला, 15 पैक-वर्ष का इतिहास।",
+    objective: `अहम आंकड़े:\nBP: ${patient?.vitals?.bp || '138/88'}\nSpO2: ${patient?.vitals?.spo2 || '96'}%\nHR: ${patient?.vitals?.hr || '82'} bpm\nTemp: ${patient?.vitals?.temp || '98.4'} °F\nWeight: ${patient?.vitals?.weight || '74'} kg`,
+    assessment: "1. सीने में जकड़न और सांस फूलने के साथ लगातार सूखी खांसी, जो अस्थमा या सांस की बीमारी का संकेत है।\n2. तंबाकू के सेवन का इतिहास, जिससे शुरुआती COPD का संदेह है।",
+    plan: "- फेफड़ों की कार्यक्षमता का आकलन करने के लिए चेस्ट एक्स-रे और स्पाइरोमेट्री करवाएं।\n- सीने की जकड़न और सांस फूलने से राहत के लिए साल्बुटामोल इनहेलर जरूरत पड़ने पर शुरू करें।\n- अगली विजिट पर धूम्रपान रोकने के तरीकों पर चर्चा करें।\n- इमेजिंग और PFT रिपोर्ट आने के बाद दो सप्ताह में फिर से आएं।"
   };
 
   useEffect(() => {
@@ -70,7 +77,7 @@ export default function SoapNoteView({ patient, onBack }) {
             <button className="icon-btn" style={{ color: 'var(--primary-color)' }} onClick={() => setShowShareModal(true)} title="Share Options">
               <Share2 size={20} />
             </button>
-            <button className="icon-btn" style={{ color: 'var(--primary-color)' }} onClick={() => setShowKannada(!showKannada)} title="Translate">
+            <button className="icon-btn" style={{ color: 'var(--primary-color)' }} onClick={() => setShowHindi(!showHindi)} title="Translate">
               <Languages size={20} />
             </button>
             <button className="icon-btn" style={{ color: 'var(--primary-color)' }} onClick={handlePrint} title="Export PDF">
@@ -100,7 +107,7 @@ export default function SoapNoteView({ patient, onBack }) {
                 <span className="confidence-badge">98% AI</span>
               </div>
               <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1, backgroundColor: 'var(--bg-color)', padding: '10px', borderRadius: '8px', overflowY: 'auto', border: '1px solid var(--border-color)' }}>
-                {data.subjective}
+                {showHindi ? hindiData.subjective : data.subjective}
               </p>
             </div>
 
@@ -113,7 +120,7 @@ export default function SoapNoteView({ patient, onBack }) {
                 <span className="confidence-badge">97% AI</span>
               </div>
               <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1, backgroundColor: 'var(--bg-color)', padding: '10px', borderRadius: '8px', overflowY: 'auto', border: '1px solid var(--border-color)' }}>
-                {data.objective}
+                {showHindi ? hindiData.objective : data.objective}
               </p>
             </div>
 
@@ -126,7 +133,7 @@ export default function SoapNoteView({ patient, onBack }) {
                 <span className="confidence-badge">94% AI</span>
               </div>
               <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1, backgroundColor: 'var(--bg-color)', padding: '10px', borderRadius: '8px', whiteSpace: 'pre-wrap', overflowY: 'auto', border: '1px solid var(--border-color)' }}>
-                {data.assessment}
+                {showHindi ? hindiData.assessment : data.assessment}
               </p>
             </div>
 
@@ -139,7 +146,7 @@ export default function SoapNoteView({ patient, onBack }) {
                 <span className="confidence-badge">99% AI</span>
               </div>
               <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1, backgroundColor: 'var(--bg-color)', padding: '10px', borderRadius: '8px', whiteSpace: 'pre-wrap', overflowY: 'auto', border: '1px solid var(--border-color)' }}>
-                {data.plan}
+                {showHindi ? hindiData.plan : data.plan}
               </p>
             </div>
             
@@ -193,8 +200,8 @@ export default function SoapNoteView({ patient, onBack }) {
                 <button className="btn-secondary" style={{ flex: 1 }} onClick={() => setShowShareModal(true)}>
                    <Share2 size={18} /> Share Note
                 </button>
-                <button className="btn-secondary" style={{ flex: 1 }} onClick={() => setShowKannada(!showKannada)}>
-                   <Languages size={18} /> {showKannada ? 'View English' : 'View Kannada'}
+                <button className="btn-secondary" style={{ flex: 1 }} onClick={() => setShowHindi(!showHindi)}>
+                   <Languages size={18} /> {showHindi ? 'View English' : 'View Hindi'}
                 </button>
                 <button className="btn-secondary" style={{ flex: 1 }} onClick={handlePrint}>
                    <Download size={18} /> Export PDF
