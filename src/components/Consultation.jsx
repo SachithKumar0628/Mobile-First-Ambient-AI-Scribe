@@ -13,6 +13,12 @@ export default function Consultation({ patient, onGenerateSoap, onBack }) {
     weight: '74'
   });
   const recognitionRef = useRef(null);
+  const recordStateRef = useRef(recordState);
+
+  // Keep ref up to date to avoid stale closures in onend
+  useEffect(() => {
+    recordStateRef.current = recordState;
+  }, [recordState]);
 
   const isRecording = recordState === 'recording';
   const isStopped = recordState === 'stopped';
@@ -31,18 +37,16 @@ export default function Consultation({ patient, onGenerateSoap, onBack }) {
         for (let i = event.resultIndex; i < event.results.length; i++) {
           if (event.results[i].isFinal) {
             setTranscript(prev => {
-                const cleaned = prev === "Listening..." ? "" : prev;
+                const cleaned = (prev === "Listening..." || prev === "No speech detected. Please try speaking or load mock data.") ? "" : prev;
                 return cleaned + (cleaned ? " " : "") + event.results[i][0].transcript;
             });
-          } else {
-            // Interim result - could show it but let's keep it simple for now
           }
         }
       };
 
       recognitionRef.current.onend = () => {
-        if (recordState === 'recording') {
-          recognitionRef.current.start();
+        if (recordStateRef.current === 'recording') {
+          try { recognitionRef.current.start(); } catch(e) {}
         }
       };
     }
@@ -52,28 +56,36 @@ export default function Consultation({ patient, onGenerateSoap, onBack }) {
         recognitionRef.current.stop();
       }
     };
-  }, [recordState]);
+  }, []); // Run once on component mount
 
   const toggleRecording = () => {
     if (recordState === 'idle') {
       setRecordState('recording');
       setTranscript("Listening...");
       if (recognitionRef.current) {
-        recognitionRef.current.start();
+        try { recognitionRef.current.start(); } catch(e) {}
       }
     } else if (recordState === 'recording') {
       setRecordState('stopped');
       if (recognitionRef.current) {
         recognitionRef.current.stop();
       }
-      if (transcript === "Listening...") {
-        setTranscript("No speech detected. Please try speaking or load mock data.");
-      }
+      setTranscript(prev => {
+        if (prev === "Listening...") {
+          return "No speech detected. Please try speaking or load mock data.";
+        }
+        return prev;
+      });
     } else if (recordState === 'stopped') {
         setRecordState('recording');
-        setTranscript("Listening...");
+        setTranscript(prev => {
+          if (prev === "No speech detected. Please try speaking or load mock data.") {
+            return "Listening...";
+          }
+          return prev;
+        });
         if (recognitionRef.current) {
-          recognitionRef.current.start();
+          try { recognitionRef.current.start(); } catch(e) {}
         }
     }
   };
