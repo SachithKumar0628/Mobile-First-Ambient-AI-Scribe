@@ -93,6 +93,51 @@ function Dashboard({ onStartRecording }) {
         </div>
       </div>
 
+      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', marginBottom: '16px', paddingBottom: '4px', whiteSpace: 'nowrap', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+        <div style={{ backgroundColor: '#e2e8f0', color: 'var(--text-primary)', padding: '6px 12px', borderRadius: '16px', fontSize: '0.8rem', fontWeight: 600 }}>Avg note time: 1.8s</div>
+        <div style={{ backgroundColor: '#e2e8f0', color: 'var(--text-primary)', padding: '6px 12px', borderRadius: '16px', fontSize: '0.8rem', fontWeight: 600 }}>Accuracy: 98%</div>
+        <div style={{ backgroundColor: '#e2e8f0', color: 'var(--text-primary)', padding: '6px 12px', borderRadius: '16px', fontSize: '0.8rem', fontWeight: 600 }}>This week: 24 notes</div>
+      </div>
+
+      <div style={{ marginBottom: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Recent Notes</h3>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          
+          <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}>
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Ravi Kumar</span>
+                <span style={{ color: 'var(--text-secondary)' }}>·</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Today 9:45 AM</span>
+              </div>
+              <span style={{ fontSize: '0.7rem', color: 'var(--success-color)', backgroundColor: 'rgba(16, 185, 129, 0.1)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>Complete</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', margin: 0 }}>"Chronic cough, BP elevated"</p>
+              <button style={{ color: 'var(--primary-color)', fontSize: '0.8rem', fontWeight: 600 }}>View</button>
+            </div>
+          </div>
+
+          <div className="card" style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}>
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Ananya Sharma</span>
+                <span style={{ color: 'var(--text-secondary)' }}>·</span>
+                <span style={{ color: 'var(--text-secondary)' }}>Yesterday</span>
+              </div>
+              <span style={{ fontSize: '0.7rem', color: 'var(--success-color)', backgroundColor: 'rgba(16, 185, 129, 0.1)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>Complete</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', margin: 0 }}>"Glucose levels stable"</p>
+              <button style={{ color: 'var(--primary-color)', fontSize: '0.8rem', fontWeight: 600 }}>View</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
         <button className="btn-primary" onClick={onStartRecording} style={{ width: 'auto', padding: '10px 24px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', fontSize: '0.95rem', borderRadius: '24px' }}>
           <Play size={18} fill="currentColor" />
