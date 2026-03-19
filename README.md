@@ -4,7 +4,7 @@
   # 🎙️ MedScribe AI
   **Mobile-First Ambient AI Clinical Scribe**
 
-  **[ PS-1 • Healthcare AI Hackathon 2026 • AI Mevreicks ]**
+  **[ PS-1 • Healthcare AI Hackathon 2026 • Team AI Mevreicks ]**
 
   [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
   [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
