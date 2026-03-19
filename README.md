@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <img src="https://api.iconify.design/lucide:activity.svg?color=%234f46e5&width=80" alt="MedScribe AI Logo" />
 
   # 🎙️ MedScribe AI
@@ -11,7 +11,6 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![Web Speech API](https://img.shields.io/badge/Web_Speech_API-4CAF50?style=for-the-badge&logo=Google-Chrome&logoColor=white)]()
   [![HIPAA](https://img.shields.io/badge/HIPAA-Compliant_UI-0052CC?style=for-the-badge&logo=verizon&logoColor=white)]()
-  [![Hackathon](https://img.shields.io/badge/🏆_Hackathon-Winner_Ready-FFD700?style=for-the-badge)]()
 </div>
 
 ---
@@ -122,8 +121,5 @@ npm run dev
 ---
 
 <div align="center">
-  <p><b>Built with ❤️ and a lot of ☕ by Team MedScribe</b></p>
-  <p>Lead Dev: <a href="https://github.com/SachithKumar0628">Sachith Kumar</a></p>
-  <br>
   <p><i>🔒 SECURE &nbsp; · &nbsp; 🛡️ HIPAA READY &nbsp; · &nbsp; 🏥 END-TO-END ENCRYPTED</i></p>
 </div>
